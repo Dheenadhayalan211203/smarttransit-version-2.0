@@ -26,9 +26,8 @@ connectToDb();
 
 app.post('/addcount-rout1', async function (req, res) {
   try {
-    var routno = () => {
-      Math.floor(Math.random() * 10)
-    }
+    var routno = 1// Math.floor(Math.random() * 10)
+   
 
     var url = "https://smarttransitapi.onrender.com/deleteticket" + routno;
     Qrcode.toDataURL(url)
@@ -36,7 +35,8 @@ app.post('/addcount-rout1', async function (req, res) {
         Rout1.create({ 'route': 1,
           "stop": req.body.stop,
           "ticketCount": req.body.ticketcount,
-          "qrcodeurl": qrcodeurl
+          "qrcodeurl": qrcodeurl,
+          "idno":routno
         })
           .then((data) => {
             res.status(201).json({ "status": "success", "message": "Count added", "qrcodeurl": qrcodeurl })
@@ -53,16 +53,19 @@ app.post('/addcount-rout1', async function (req, res) {
   }
 })
 
-app.post('/deleteticket/:qrcodeurl', async function (req, res) {
-  try {
-    const { qrcodeurl } = req.params;
-    const deletedData = await Rout1.findOneAndDelete({ qrcodeurl });
-    if (deletedData) {
-      res.status(200).json({ "status": "success", "message": "QR code deleted" })
-    } else {
-      res.status(404).json({ "status": "failure", "message": "QR code not found" })
-    }
-  } catch (error) {
-    res.status(500).json({ "status": "failure", "message": "Internal server error" })
+
+
+app.post('/deleteticket1',async function (req, res){
+  try{
+    
+  await  Rout1.deleteOne({"idno":1})
+  res.status(201).json({ "status": "success", "message": "data removed" })
+
+
+
+  }
+  catch
+  {
+    res.status(500).json({"status":"internal server error"})
   }
 })

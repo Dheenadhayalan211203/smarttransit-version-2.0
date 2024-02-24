@@ -15,6 +15,9 @@ const rout1=new mongoose.Schema({
     },
     qrcodeurl :{
         type:String
+    },
+    idno:{
+        type:Number
     }
     
     
