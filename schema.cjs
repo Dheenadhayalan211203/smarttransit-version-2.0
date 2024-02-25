@@ -27,12 +27,26 @@ const rout1=new mongoose.Schema({
 })
 
 const rout2=new mongoose.Schema({
-    routno:{
-        type:Number
+    route:{
+        type:Number,
+        
     },
-    count:{
+    stop:{
+        type:Number,
+       
+    },
+    ticketCount:{
+        type:Number,
+        
+
+    },
+    qrcodeurl :{
+        type:String
+    },
+    idno:{
         type:Number
     }
+    
     
     
     
